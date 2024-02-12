@@ -24,6 +24,12 @@ class Window:
         self.welcome.place(x=0, y=0, width=800, height=50)
         self.instruction.place(x=0, y=80, width=800, height=50)
 
+        self.input = Entry(self.root,
+                           font=("", 14)
+                           )
+
+        self.input.place(x=200, y=200, width=400, height=50)
+
         self.root.mainloop()
 
 
