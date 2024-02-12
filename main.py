@@ -23,3 +23,13 @@ class Window:
         
         self.welcome.place(x=0, y=0, width=800, height=50)
         self.instruction.place(x=0, y=80, width=800, height=50)
+
+        self.root.mainloop()
+
+
+def main():
+        win = Window(800, 600)
+
+
+if __name__ == "__main__":
+     main()
