@@ -22,13 +22,21 @@ class Window:
                                 )
 
         self.user_input = Entry(self.root,
-                             font=("", 14)
+                             font=("", 14),
+                             show="*"
                             )
+        
         self.user_input.bind("<Return>", self.display_output)
         self.user_input.bind("<Control-KeyRelease-a>", self.select_all)
         self.user_input.bind("<Control-x>", self.cut_text)
         self.user_input.bind("<Control-c>", self.copy_text)
         self.user_input.bind("<Control-v>", self.paste_text)
+
+        self.show_hide_button = Button(self.root,
+                                       text="Show/Hide",
+                                       command=self.toggle_show_hide,
+                                       font=("", 12)
+                                      )
 
         self.output = Label(self.root,
                             font=("", 12),
@@ -51,6 +59,7 @@ class Window:
         self.user_input.place(x=200, y=160, width=400, height=50)
         self.output.place(x=50, y=240, width=700, height=175)
         self.test_button.place(x=285, y=460, width=230, height=50)
+        self.show_hide_button.place(x=625, y=160, width=125, height=50)
 
         self.root.mainloop()
 
@@ -110,6 +119,11 @@ class Window:
         if self.user_input.selection_present():
             self.user_input.delete("sel.first", "sel.last")
 
+    def toggle_show_hide(self):
+        if self.user_input['show'] == '*':
+            self.user_input['show'] = ''
+        else:
+            self.user_input['show'] = '*'
 
 def main():
         win = Window(800, 600)
