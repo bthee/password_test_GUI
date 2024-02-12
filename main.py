@@ -21,15 +21,35 @@ class Window:
                                  bg="white"
                                 )
 
-        self.input = Entry(self.root,
+        self.user_input = Entry(self.root,
                            font=("", 14)
                            )
+
+        self.output = Label(self.root,
+                            font=("", 12),
+                            padx=10,
+                            anchor="w",
+                            bg="lightgray"
+                            )
         
+        self.test_button = Button(self.root,
+                                  text="Check your password!"
+                                  )
+
+
         self.welcome.place(x=0, y=0, width=800, height=50)
         self.instruction.place(x=0, y=80, width=800, height=50)
-        self.input.place(x=200, y=200, width=400, height=50)
+        self.user_input.place(x=200, y=200, width=400, height=50)
+        self.output.place(x=100, y=280, width=600, height=200)
+        self.test_button.place(x=300, y=500, width=200, height=50)
 
         self.root.mainloop()
+
+
+    def get_input(self):
+         self.output.config(text= self.user_input.get(), 
+                            font= ('Helvetica 13')
+                            )
 
 
 def main():
