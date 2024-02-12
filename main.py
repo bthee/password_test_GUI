@@ -1,4 +1,4 @@
-from tkinter import Tk, Label, Entry, Button
+from tkinter import Tk, Label, Entry, Button, TclError
 
 class Window:
     def __init__(self, width, heigth):
@@ -22,8 +22,13 @@ class Window:
                                 )
 
         self.user_input = Entry(self.root,
-                           font=("", 14)
-                           )
+                             font=("", 14)
+                            )
+        self.user_input.bind("<Return>", self.display_output)
+        self.user_input.bind("<Control-KeyRelease-a>", self.select_all)
+        self.user_input.bind("<Control-x>", self.cut_text)
+        self.user_input.bind("<Control-c>", self.copy_text)
+        self.user_input.bind("<Control-v>", self.paste_text)
 
         self.output = Label(self.root,
                             font=("", 12),
@@ -43,14 +48,14 @@ class Window:
 
         self.welcome.place(x=0, y=0, width=800, height=50)
         self.instruction.place(x=0, y=80, width=800, height=50)
-        self.user_input.place(x=200, y=200, width=400, height=50)
-        self.output.place(x=50, y=280, width=700, height=175)
-        self.test_button.place(x=285, y=500, width=230, height=50)
+        self.user_input.place(x=200, y=160, width=400, height=50)
+        self.output.place(x=50, y=240, width=700, height=175)
+        self.test_button.place(x=285, y=460, width=230, height=50)
 
         self.root.mainloop()
 
 
-    def display_output(self):
+    def display_output(self, event=None):
         input_text = self.user_input.get()
         length = len(input_text) >= 12
         number = any(char.isnumeric() for char in input_text)
@@ -91,6 +96,18 @@ class Window:
             output_text += imp_sp
         
         self.output.config(text=output_text)
+
+    def select_all(self, event=None):
+        self.user_input.select_range(0, 'end')
+    
+    def cut_text(self, event=None):
+        self.user_input.event_generate("<<Cut>>")
+    
+    def copy_text(self, event=None):
+        self.user_input.event_generate("<<Copy>>")
+    
+    def paste_text(self, event=None):
+        self.user_input.delete("sel.first", "sel.last")
 
 
 def main():
