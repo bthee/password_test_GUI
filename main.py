@@ -1,4 +1,4 @@
-from tkinter import Tk, Label, Entry, Button, TclError
+from tkinter import Tk, Label, Entry, Button
 
 class Window:
     def __init__(self, width, heigth):
@@ -7,30 +7,30 @@ class Window:
         self.root.geometry(f"{width}x{heigth}")
         self.root.configure(bg="white")
 
-        self.welcome = Label(self.root,
+        self.welcome_label = Label(self.root,
                              text="Welcome!",
                              font=("", 16),
                              bg="lightblue"
                             )
         
-        self.instruction = Label(self.root,
-                                 text="To test your password, just enter it in the field below and press 'enter' or hit the test button.",
-                                 font=("", 12),
-                                 padx=10,
-                                 anchor="w",
-                                 bg="white"
-                                )
+        self.instruction_label = Label(self.root,
+            text="To test your password, just enter it in the field below and press 'enter' or hit the test button.",
+            font=("", 12),
+            padx=10,
+            anchor="w",
+            bg="white"
+            )
 
         self.user_input = Entry(self.root,
-                             font=("", 14),
-                             show="*"
-                            )
+                                font=("", 14),
+                                show="*"
+                                )
         
         self.user_input.bind("<Return>", self.display_output)
         self.user_input.bind("<Control-KeyRelease-a>", self.select_all)
         self.user_input.bind("<Control-x>", self.cut_text)
         self.user_input.bind("<Control-c>", self.copy_text)
-        self.user_input.bind("<Control-v>", self.paste_text)
+        self.user_input.bind("<Control-v>", self.delete_for_paste)
 
         self.show_hide_button = Button(self.root,
                                        text="Show/Hide",
@@ -38,27 +38,27 @@ class Window:
                                        font=("", 12)
                                       )
 
-        self.output = Label(self.root,
-                            font=("", 12),
-                            padx=10,
-                            pady=10,
-                            anchor="nw",
-                            justify="left",
-                            bg="lightgray"
-                            )
+        self.output_field = Label(self.root,
+                                  font=("", 12),
+                                  padx=10,
+                                  pady=10,
+                                  anchor="nw",
+                                  justify="left",
+                                  bg="lightgray"
+                                )
         
-        self.test_button = Button(self.root,
-                                  text="Check your password!",
-                                  command=self.display_output,
-                                  font=("", 12, "bold")
-                                  )
+        self.check_pw_button = Button(self.root,
+                                      text="Check your password!",
+                                      command=self.display_output,
+                                      font=("", 12, "bold")
+                                    )
 
 
-        self.welcome.place(x=0, y=0, width=800, height=50)
-        self.instruction.place(x=0, y=80, width=800, height=50)
+        self.welcome_label.place(x=0, y=0, width=800, height=50)
+        self.instruction_label.place(x=0, y=80, width=800, height=50)
         self.user_input.place(x=200, y=160, width=400, height=50)
-        self.output.place(x=50, y=240, width=700, height=175)
-        self.test_button.place(x=285, y=460, width=230, height=50)
+        self.output_field.place(x=50, y=240, width=700, height=175)
+        self.check_pw_button.place(x=285, y=460, width=230, height=50)
         self.show_hide_button.place(x=625, y=160, width=125, height=50)
 
         self.root.mainloop()
@@ -104,18 +104,23 @@ class Window:
         if not special_ch:
             output_text += imp_sp
         
-        self.output.config(text=output_text)
+        self.output_field.config(text=output_text)
 
     def select_all(self, event=None):
         self.user_input.select_range(0, 'end')
     
     def cut_text(self, event=None):
-        self.user_input.event_generate("<<Cut>>")
+        self.root.clipboard_clear()
+        self.root.clipboard_append(self.user_input.get())
+        if self.user_input.selection_present():
+            self.user_input.delete("sel.first", "sel.last")
     
     def copy_text(self, event=None):
-        self.user_input.event_generate("<<Copy>>")
+        self.user_input.selection_clear()
+        self.root.clipboard_clear()
+        self.root.clipboard_append(self.user_input.get())
     
-    def paste_text(self, event=None):
+    def delete_for_paste(self, event=None):
         if self.user_input.selection_present():
             self.user_input.delete("sel.first", "sel.last")
 
