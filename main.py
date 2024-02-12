@@ -30,20 +30,22 @@ class Window:
                             padx=10,
                             pady=10,
                             anchor="nw",
+                            justify="left",
                             bg="lightgray"
                             )
         
         self.test_button = Button(self.root,
                                   text="Check your password!",
-                                  command=self.display_output
+                                  command=self.display_output,
+                                  font=("", 12, "bold")
                                   )
 
 
         self.welcome.place(x=0, y=0, width=800, height=50)
         self.instruction.place(x=0, y=80, width=800, height=50)
         self.user_input.place(x=200, y=200, width=400, height=50)
-        self.output.place(x=50, y=280, width=700, height=200)
-        self.test_button.place(x=300, y=500, width=200, height=50)
+        self.output.place(x=50, y=280, width=700, height=175)
+        self.test_button.place(x=285, y=500, width=230, height=50)
 
         self.root.mainloop()
 
@@ -59,17 +61,34 @@ class Window:
         count = sum([length, number, upper_ch, lower_ch, special_ch])
 
         if count == 5:
-            output_text = "Your password is strong!"
+            output_text = "Your password is strong!\n"
         elif count == 4 and length:
-            output_text = "Your password is good! Here is an improvement you should make."
+            output_text = "Your password is good! Here is an improvement you should make.\n"
         elif count == 4 and not length:
-            output_text = "Your password would be strong if you increase its length."
+            output_text = "Your password would be strong if you increase its length to 12 characters.\n"
         elif count == 3 and length:
-            output_text = "Your password is okay. Here are some improvements you should make."
+            output_text = "Your password is okay. Here are some improvements you should make.\n"
         elif count == 3 and not length:
-            output_text = "Your password would be strong if you increase its length."
+            output_text = "Your password is weak! You should make the following improvements!\n"
         elif count <= 2:
-            output_text = "Your password is very weak! You should make the following improvements!"
+            output_text = "Your password is very weak! You should make the following improvements!\n"
+        
+        imp_length = "- Increase the length of your password to at least 12 characters.\n"
+        imp_num = "- Include at least one number character like '1, 2, 3 ...'\n"
+        imp_up = "- Include at least one uppercase character like 'A, B, C ...'\n"
+        imp_low = "- Include at least one lowercase character like 'a, b, c ...'\n"
+        imp_sp = "- Include at least one special character like '@, !, $ ...'\n"
+
+        if not length and count <= 3:
+            output_text += imp_length
+        if not number:
+            output_text += imp_num
+        if not upper_ch:
+            output_text += imp_up
+        if not lower_ch:
+            output_text += imp_low
+        if not special_ch:
+            output_text += imp_sp
         
         self.output.config(text=output_text)
 
