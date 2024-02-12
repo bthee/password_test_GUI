@@ -26,6 +26,8 @@ class Window:
                                 show="*"
                                 )
         
+        self.user_input.focus_set()
+        
         self.user_input.bind("<Return>", self.display_output)
         self.user_input.bind("<Control-KeyRelease-a>", self.select_all)
         self.user_input.bind("<Control-x>", self.cut_text)
@@ -34,9 +36,14 @@ class Window:
 
         self.show_hide_button = Button(self.root,
                                        text="Show/Hide",
-                                       command=self.toggle_show_hide,
-                                       font=("", 12)
+                                       font=("", 12, "bold"),
+                                       command=self.toggle_show_hide
                                       )
+        
+        self.clear_button = Button(self.root,
+                                   text="Clear",
+                                   font=("", 12, "bold"),
+                                   command=self.clear_entry)
 
         self.output_field = Label(self.root,
                                   font=("", 12),
@@ -60,6 +67,7 @@ class Window:
         self.output_field.place(x=50, y=240, width=700, height=175)
         self.check_pw_button.place(x=285, y=460, width=230, height=50)
         self.show_hide_button.place(x=625, y=160, width=125, height=50)
+        self.clear_button.place(x=625, y=460, width=120, height=50)
 
         self.root.mainloop()
 
@@ -129,6 +137,10 @@ class Window:
             self.user_input['show'] = ''
         else:
             self.user_input['show'] = '*'
+
+    def clear_entry(self):
+        self.user_input.delete(0, "end")
+        self.output_field.config(text="")
 
 def main():
         win = Window(800, 600)
