@@ -107,7 +107,8 @@ class Window:
         self.user_input.event_generate("<<Copy>>")
     
     def paste_text(self, event=None):
-        self.user_input.delete("sel.first", "sel.last")
+        if self.user_input.selection_present():
+            self.user_input.delete("sel.first", "sel.last")
 
 
 def main():
