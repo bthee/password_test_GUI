@@ -40,14 +40,14 @@
     cd password_test_GUI
     ```
 
-## 3. Features <a name="features"></a>
+## 4. Features <a name="features"></a>
 
 1. Allows users to input passwords for evaluation.
 2. Provides feedback on the strength of the entered password.
 3. Offers suggestions for improving weak passwords.
 4. Includes options to show/hide the password and clear the input field.
 
-## 4. How to Use <a name="how-to-use"></a>
+## 5. How to Use <a name="how-to-use"></a>
 
 To run `password_test_GUI`, follow these steps:
 
@@ -68,7 +68,7 @@ To run `password_test_GUI`, follow these steps:
 5. Press 'enter' or hit the 'Check your password!' button.
 6. Receive feedback on the strength of your password based on specified criteria.
 
-## 5. Examples <a name="examples"></a>
+## 6. Examples <a name="examples"></a>
 
 ![Example Image](example1.jpg)
 
