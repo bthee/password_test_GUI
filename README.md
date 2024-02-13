@@ -49,23 +49,23 @@
 
 ## 4. How to Use <a name="how-to-use"></a>
 
-To run `password_test_CLI`, follow these steps:
+To run `password_test_GUI`, follow these steps:
 
 1. Open a terminal.
 2. Navigate to the directory containing the script.
 
     ```bash
-    cd path/to/password_test_CLI
+    cd path/to/password_test_GUI
     ```
 
 3. Run the script by executing:
 
     ```bash
-    python password_test_CLI.py
+    python password_test_GUI.py or python main.py
     ```
 
-4. Follow the prompts to either begin or exit the program.
-5. If you choose to begin, input a password when prompted.
+4. Type in the password you want to test.
+5. Press 'enter' or hit the 'Check your password!' button.
 6. Receive feedback on the strength of your password based on specified criteria.
 
 ## 5. Examples <a name="examples"></a>
