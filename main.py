@@ -2,11 +2,14 @@ from tkinter import Tk, Label, Entry, Button
 
 class Window:
     def __init__(self, width, heigth):
+        # Initialize the window
         self.root = Tk()
         self.root.title("Password Strength Test")
         self.root.geometry(f"{width}x{heigth}")
         self.root.configure(bg="white")
 
+        # Create labels, entry, and buttons
+        # Set their properties and bind events
         self.welcome_label = Label(self.root,
                              text="Welcome!",
                              font=("", 16),
@@ -69,10 +72,12 @@ class Window:
         self.show_hide_button.place(x=625, y=160, width=125, height=50)
         self.clear_button.place(x=625, y=460, width=120, height=50)
 
+        # Display the window
         self.root.mainloop()
 
 
     def display_output(self, event=None):
+        # Evaluate password strength based on criteria
         input_text = self.user_input.get()
         length = len(input_text) >= 12
         number = any(char.isnumeric() for char in input_text)
@@ -143,6 +148,7 @@ class Window:
         self.output_field.config(text="")
 
 def main():
+        # Initialize window object
         win = Window(800, 600)
 
 
